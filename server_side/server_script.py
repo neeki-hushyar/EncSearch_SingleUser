@@ -13,7 +13,7 @@ import argparse
 def listen_for_connection(port):
     # wait for and return open conenction
     serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    serversocket.bind((socket.gethostname(), port))
+    serversocket.bind((socket.gethostbyname(socket.gethostname()), port))
     serversocket.listen(5)
     server_connection, address = serversocket.accept()
     return server_connection
