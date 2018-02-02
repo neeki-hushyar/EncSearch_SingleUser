@@ -37,7 +37,7 @@
 &emsp;&emsp;python3 upload.py -i <remote_IP> -d <rel_path_to_dir_to_enc>
 
 &emsp;request.py:  
-&emsp;&emsp;python3 request.py -i <remote_IP> -w <search_term> -d <full_path_to_dest_dir> -p <optional_port>
+&emsp;&emsp;python3 request.py -i <remote_IP> -w <search_term> -p <optional_port>
 
 &emsp;upload_more.py:  
 &emsp;&emsp;python3 upload_more.py -i <remote_IP> -d <rel_path_to_dir_to_enc>

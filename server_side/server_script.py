@@ -9,11 +9,11 @@ from store_more import StoreMore
 import argparse
 
 
-
-def listen_for_connection(port):
+def listen_for_connection(port, priv_ip):
     # wait for and return open conenction
     serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    serversocket.bind((socket.gethostbyname(socket.gethostname()), port))
+    serversocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    serversocket.bind((priv_ip, port))
     serversocket.listen(5)
     server_connection, address = serversocket.accept()
     return server_connection
@@ -30,13 +30,14 @@ def process_first_transmission(server_connection):
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
+    parser.add_argument('-i', dest='ip_address')
     parser.add_argument('-p', dest='port', default=9998)
     args = parser.parse_args()
-    return int(args.port)
+    return int(args.port), args.ip_address.strip()
 
 if __name__ == '__main__':
-    port = parse_arguments()
-    connection = listen_for_connection(port)
+    port, ip = parse_arguments()
+    connection = listen_for_connection(port, ip)
     flag = process_first_transmission(connection)
     if flag == 1: 
         # client side script is request.py
